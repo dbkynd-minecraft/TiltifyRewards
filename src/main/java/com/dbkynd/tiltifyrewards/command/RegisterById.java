@@ -59,7 +59,9 @@ public class RegisterById {
         context.getSource().sendFeedback(Text.literal(campaign.data.name), false);
         context.getSource().sendFeedback(Text.literal("Registered"), false);
 
-        // TODO: store this to a config file and disconnect reconnect with new value
+        TiltifyRewards.CONFIG.write("campaign_id", String.valueOf(campaign.data.id));
+
+        // TODO: reconnect websocket with new value
         return 1;
     }
 }

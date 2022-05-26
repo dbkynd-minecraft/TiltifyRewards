@@ -12,6 +12,7 @@ import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -28,7 +29,7 @@ public class RegisterByName {
                                     .executes(RegisterByName::run)))));
     }
 
-    private static int run(CommandContext<ServerCommandSource> context) throws CommandSyntaxException{
+    private static int run(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
         String name = getString(context, "name");
         TiltifyRewards.LOGGER.info("Registering tiltify campaign by username => " + name);
         context.getSource().sendFeedback(Text.literal("Finding campaign for user: " + name), false);
@@ -66,7 +67,9 @@ public class RegisterByName {
         context.getSource().sendFeedback(Text.literal(campaign.data.name), false);
         context.getSource().sendFeedback(Text.literal("Registered"), false);
 
-        // TODO: store this to a config file and reconnect with new value
+        TiltifyRewards.CONFIG.write("campaign_id", String.valueOf(campaign.data.id));
+
+        // TODO: reconnect websocket with new value
         return 1;
     }
 }

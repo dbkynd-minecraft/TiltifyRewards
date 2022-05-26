@@ -33,6 +33,8 @@ dependencies {
 	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.8.8'
 	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.8.8'
 	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.8'
+
+	implementation 'com.moandjiezana.toml:toml4j:0.7.2'
 }
 
 processResources {
