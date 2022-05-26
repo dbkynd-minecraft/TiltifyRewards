@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "tiltifyrewards",
+  "version": "${version}",
+
+  "name": "Tiltify Rewards",
+  "description": "",
+  "authors": [
+    "DBKynd"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "MIT",
+  "icon": "assets/tiltifyrewards/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.dbkynd.tiltifyrewards.TiltifyRewards"
+    ]
+  },
+  "mixins": [
+    "tiltifyrewards.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.6",
+    "fabric": "*",
+    "minecraft": "1.19-beta.2",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
