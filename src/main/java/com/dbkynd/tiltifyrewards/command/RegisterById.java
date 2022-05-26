@@ -4,6 +4,7 @@ import com.dbkynd.tiltifyrewards.TiltifyRewards;
 import com.dbkynd.tiltifyrewards.http.CampaignResponse;
 import com.dbkynd.tiltifyrewards.http.JsonBodyHandler;
 import com.dbkynd.tiltifyrewards.http.UserCampaignsResponse;
+import com.dbkynd.tiltifyrewards.tiltify.WebSocketManager;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -57,11 +58,11 @@ public class RegisterById {
 
         context.getSource().sendFeedback(Text.literal(campaign.data.username), false);
         context.getSource().sendFeedback(Text.literal(campaign.data.name), false);
-        context.getSource().sendFeedback(Text.literal("Registered"), false);
 
         TiltifyRewards.CONFIG.write("campaign_id", String.valueOf(campaign.data.id));
+        WebSocketManager.connect();
 
-        // TODO: reconnect websocket with new value
+        context.getSource().sendFeedback(Text.literal("Registered"), false);
         return 1;
     }
 }

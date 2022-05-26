@@ -46,6 +46,7 @@ public class Config {
         } catch (IOException error) {
             error.printStackTrace();
         }
+        this.read = read.read(campaignFile);
     }
 
     public Toml read() {

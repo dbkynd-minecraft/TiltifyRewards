@@ -30,6 +30,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.dbkynd.tiltifyrewards.TiltifyRewards;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.text.Text;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft;
 import org.java_websocket.handshake.ServerHandshake;
@@ -45,6 +48,7 @@ public class WebSocket extends WebSocketClient {
     @Override
     public void onOpen(ServerHandshake handshakedata) {
         TiltifyRewards.LOGGER.info("CONNECTED TO TILTIFY");
+        MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(Text.literal("TILTIFY CONNECTED"));
     }
 
     @Override
@@ -55,8 +59,8 @@ public class WebSocket extends WebSocketClient {
 
     @Override
     public void onClose(int code, String reason, boolean remote) {
+        MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(Text.literal("TILTIFY DISCONNECTED"));
         TiltifyRewards.LOGGER.warn("Connection closed by " + (remote ? "remote peer" : "us") + " Code: " + code + " Reason: " + reason);
-        this.connect();
     }
 
     @Override
